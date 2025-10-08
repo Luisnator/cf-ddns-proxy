@@ -1,0 +1,15 @@
+[Unit]
+Description=Cloudflare DDNS Proxy for Fritzbox
+After=network.target
+
+[Service]
+User=www-data
+Group=www-data
+WorkingDirectory=/opt/cf-ddns-proxy
+EnvironmentFile=/opt/cf-ddns-proxy/.env
+ExecStart=/usr/bin/env bash -lc 'gunicorn -c gunicorn.conf.py app:app'
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
